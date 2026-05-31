@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TTAG — Soluciones digitales para negocios locales</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f7f4;
+      --white: #ffffff;
+      --black: #111111;
+      --text: #4b4b4b;
+      --green: #229ac5;
+      --green-dark: #1668a3;
+      --border: #e5e5e5;
+      --soft: #f1f1f1;
+      --radius: 20px;
+      --transition: 0.3s ease;
+      --font-title: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      background: rgba(248,247,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 82px;
+    }
+
+    .logo {
+      font-family: var(--font-title);
+      font-size: 30px;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .logo span {
+      color: var(--green);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--black);
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      min-width: 220px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 10px 0;
+      color: var(--text);
+    }
+
+    .nav-links li:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      top: 34px;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--black);
+      background: white;
+    }
+
+    .btn-secondary:hover {
+      background: #f9f9f9;
+    }
+
+    #hero {
+      padding: 170px 0 120px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-title);
+      font-size: clamp(48px, 7vw, 76px);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .hero-text h1 span {
+      color: var(--green);
+    }
+
+    .hero-text p {
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 34px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+
+    .mockup-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .badge {
+      background: rgba(34, 86, 197, 0.12);
+      color: var(--green-dark);
+      padding: 8px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .mockup-box {
+      background: #f7f7f7;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .mockup-line {
+      height: 14px;
+      border-radius: 10px;
+      background: #dedede;
+      margin-bottom: 12px;
+    }
+
+    section {
+      padding: 110px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 760px;
+      margin: auto auto 70px;
+    }
+
+    .section-head h2 {
+      font-family: var(--font-title);
+      font-size: clamp(36px,5vw,58px);
+      margin-bottom: 20px;
+    }
+
+    .section-head p {
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .sector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 24px;
+    }
+
+    .sector-card {
+      background: white;
+      border-radius: 24px;
+      padding: 34px;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .sector-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.07);
+    }
+
+    .sector-card h3 {
+      font-family: var(--font-title);
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .sector-card p {
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .sector-card ul {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .sector-card li {
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .benefits {
+      background: white;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 24px;
+    }
+
+    .benefit-card {
+      padding: 34px;
+      border-radius: 24px;
+      background: #fafafa;
+      border: 1px solid var(--border);
+    }
+
+    .benefit-card h3 {
+      font-family: var(--font-title);
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .benefit-card p {
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 24px;
+    }
+
+    .process-card {
+      background: white;
+      border-radius: 24px;
+      padding: 34px;
+      border: 1px solid var(--border);
+    }
+
+    .number {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.12);
+      color: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .process-card h3 {
+      font-family: var(--font-title);
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .process-card p {
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 24px;
+    }
+
+    .testimonial {
+      background: white;
+      border-radius: 24px;
+      padding: 34px;
+      border: 1px solid var(--border);
+    }
+
+    .testimonial p {
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .testimonial strong {
+      font-family: var(--font-title);
+    }
+
+    #contact {
+      background: white;
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contact-box {
+      background: #fafafa;
+      padding: 40px;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+    }
+
+    .contact-box h2 {
+      font-family: var(--font-title);
+      font-size: 48px;
+      margin-bottom: 18px;
+    }
+
+    .contact-box p {
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 26px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: white;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    footer {
+      padding: 70px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-grid h4 {
+      margin-bottom: 18px;
+      font-family: var(--font-title);
+    }
+
+    .footer-grid p,
+    .footer-grid a {
+      color: var(--text);
+      line-height: 2;
+      text-decoration: none;
+    }
+
+    .popup {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 360px;
+      background: white;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      z-index: 9999;
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .popup h3 {
+      font-family: var(--font-title);
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .popup p {
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .popup-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    @media(max-width: 900px) {
+      .hero-grid,
+      .contact-wrapper,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-text h1 {
+        font-size: 54px;
+      }
+
+      .contact-box h2 {
+        font-size: 40px;
+      }
+
+      .popup {
+        width: calc(100% - 40px);
+        right: 20px;
+        left: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#" class="logo">TTAG<span>.</span></a>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="#">Hostelería</a>
+          <div class="dropdown">
+            <a href="restaurantes.html">Restaurantes</a>
+            <a href="bares.html">Bares</a>
+            <a href="cafeterias.html">Cafeterías</a>
+            <a href="hoteles.html">Hoteles</a>
+          </div>
+        </li>
+
+        <li>
+          <a href="#">Cuidado</a>
+          <div class="dropdown">
+            <a href="clinicas-dentales.html">Clínicas dentales</a>
+            <a href="fisios.html">Fisios</a>
+            <a href="barberias.html">Barberías</a>
+            <a href="peluquerias.html">Peluquerías</a>
+            <a href="spas.html">Spas</a>
+          </div>
+        </li>
+
+        <li>
+          <a href="#">Comercios</a>
+          <div class="dropdown">
+            <a href="tiendas-locales.html">Tiendas locales</a>
+            <a href="alimentacion.html">Alimentación</a>
+            <a href="muebles.html">Inmobiliarias</a>
+            <a href="gestorias.html">Gestorías</a>
+          </div>
+        </li>
+
+        <li>
+          <a href="#">Deporte</a>
+          <div class="dropdown">
+            <a href="gimnasios.html">Gimnasios</a>
+            <a href="pilates.html">Pilates</a>
+            <a href="crossfit.html">Crossfit</a>
+          </div>
+        </li>
+
+        <li><a href="#process">Cómo trabajamos</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+
+      <a href="#contact" class="btn btn-primary">Análisis gratuito</a>
+    </nav>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="container">
+
+    <div class="hero-grid">
+
+      <div class="hero-text">
+        <div class="badge">SOLUCIONES PARA NEGOCIOS LOCALES</div>
+
+        <h1>
+          Haz crecer tu negocio <span>sin perder tiempo</span> en tareas repetitivas.
+        </h1>
+
+        <p>
+          Ayudamos a restaurantes, clínicas, gimnasios y comercios locales a organizar reservas, fidelizar clientes y automatizar tareas diarias.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Solicitar análisis gratuito</a>
+          <a href="#sectors" class="btn btn-secondary">Ver soluciones</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+
+        <div class="mockup-top">
+          <div>
+            <strong>Panel de clientes</strong>
+          </div>
+          <div class="badge">+24 clientes este mes</div>
+        </div>
+
+        <div class="mockup-box">
+          <strong>Programa de fidelización</strong>
+          <div class="mockup-line" style="width:90%"></div>
+          <div class="mockup-line" style="width:70%"></div>
+        </div>
+
+        <div class="mockup-box">
+          <strong>Reservas automáticas</strong>
+          <div class="mockup-line" style="width:85%"></div>
+          <div class="mockup-line" style="width:60%"></div>
+        </div>
+
+        <div class="mockup-box">
+          <strong>Clientes recurrentes</strong>
+          <div class="mockup-line" style="width:95%"></div>
+          <div class="mockup-line" style="width:50%"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="sectors">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="badge">SECTORES</div>
+      <h2>Soluciones pensadas para tu negocio</h2>
+      <p>
+        Cada negocio tiene necesidades diferentes. Por eso adaptamos cada solución a cómo trabajas realmente.
+      </p>
+    </div>
+
+    <div class="sector-grid">
+
+      <div class="sector-card">
+        <h3>🍽️ Hostelería</h3>
+        <p>
+          Gestiona reservas, reduce cancelaciones y haz que tus clientes vuelvan.
+        </p>
+
+        <ul>
+          <li>✓ Reservas online</li>
+          <li>✓ Confirmaciones automáticas</li>
+          <li>✓ Fidelización</li>
+          <li>✓ Gestión de mesas</li>
+          <li>✓ Reseñas automáticas</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary">Ver soluciones</a>
+      </div>
+
+      <div class="sector-card">
+        <h3>✂️ Cuidado Personal</h3>
+        <p>
+          Organiza citas, recuerda visitas y crea clientes recurrentes.
+        </p>
+
+        <ul>
+          <li>✓ Agenda automática</li>
+          <li>✓ Recordatorios WhatsApp</li>
+          <li>✓ Historial de clientes</li>
+          <li>✓ Fidelización</li>
+          <li>✓ Control de ingresos</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary">Ver soluciones</a>
+      </div>
+
+      <div class="sector-card">
+        <h3>🛍️ Comercios</h3>
+        <p>
+          Controla ventas, clientes y promociones desde un solo sitio.
+        </p>
+
+        <ul>
+          <li>✓ Promociones automáticas</li>
+          <li>✓ Base de datos de clientes</li>
+          <li>✓ Gestión sencilla</li>
+          <li>✓ Seguimiento de ventas</li>
+          <li>✓ Fidelización</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary">Ver soluciones</a>
+      </div>
+
+      <div class="sector-card">
+        <h3>🏋️ Deporte</h3>
+        <p>
+          Gestiona cuotas, clases y reservas sin perder tiempo.
+        </p>
+
+        <ul>
+          <li>✓ Reservas de clases</li>
+          <li>✓ Renovaciones automáticas</li>
+          <li>✓ Control de pagos</li>
+          <li>✓ Seguimiento de clientes</li>
+          <li>✓ Automatización administrativa</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary">Ver soluciones</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="badge">BENEFICIOS</div>
+      <h2>Lo que consigues con TTAG</h2>
+      <p>
+        No vendemos tecnología complicada. Creamos herramientas simples que ayudan a que tu negocio funcione mejor.
+      </p>
+    </div>
+
+    <div class="benefits-grid">
+
+      <div class="benefit-card">
+        <h3>Clientes que vuelven</h3>
+        <p>
+          Programas de puntos y promociones automáticas para aumentar la fidelización.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <h3>Menos cancelaciones</h3>
+        <p>
+          Recordatorios automáticos por WhatsApp antes de cada cita o reserva.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <h3>Todo organizado</h3>
+        <p>
+          Controla clientes, ingresos y reservas desde un solo sitio.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <h3>Más tiempo</h3>
+        <p>
+          Reduce tareas manuales y dedica más tiempo a atender clientes.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <h3>Datos claros</h3>
+        <p>
+          Consulta cuánto facturas, qué días funcionan mejor y qué clientes vuelven más.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <h3>Atención más rápida</h3>
+        <p>
+          Automatiza respuestas frecuentes y mejora la experiencia del cliente.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="badge">CÓMO TRABAJAMOS</div>
+      <h2>Simple, rápido y adaptado a tu negocio</h2>
+      <p>
+        Nos enfocamos en soluciones fáciles de usar que realmente ayudan a tu día a día.
+      </p>
+    </div>
+
+    <div class="process-grid">
+
+      <div class="process-card">
+        <div class="number">1</div>
+        <h3>Analizamos tu negocio</h3>
+        <p>
+          Revisamos cómo trabajas actualmente y detectamos dónde estás perdiendo tiempo o clientes.
+        </p>
+      </div>
+
+      <div class="process-card">
+        <div class="number">2</div>
+        <h3>Te enseñamos mejoras reales</h3>
+        <p>
+          Te mostramos ideas específicas para tu negocio y cuánto tiempo puedes ahorrar.
+        </p>
+      </div>
+
+      <div class="process-card">
+        <div class="number">3</div>
+        <h3>Lo dejamos funcionando</h3>
+        <p>
+          Nos encargamos de instalarlo y explicarte cómo usarlo.
+        </p>
+      </div>
+
+      <div class="process-card">
+        <div class="number">4</div>
+        <h3>Seguimos contigo</h3>
+        <p>
+          Mantenimiento, soporte y mejoras continuas para que todo siga funcionando.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+
+    <div class="section-head">
+      <div class="badge">TESTIMONIOS</div>
+      <h2>Negocios que ya trabajan con nosotros</h2>
+    </div>
+
+    <div class="testimonial-grid">
+
+      <div class="testimonial">
+        <p>
+          “Ahora tenemos todas las reservas organizadas y muchos menos clientes cancelan.”
+        </p>
+        <strong>— Restaurante local</strong>
+      </div>
+
+      <div class="testimonial">
+        <p>
+          “Los recordatorios automáticos nos han ahorrado muchísimo tiempo.”
+        </p>
+        <strong>— Clínica dental</strong>
+      </div>
+
+      <div class="testimonial">
+        <p>
+          “Con el sistema de fidelización conseguimos que vuelvan muchos más clientes.”
+        </p>
+        <strong>— Barbería</strong>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+
+    <div class="contact-wrapper">
+
+      <div class="contact-box">
+        <div class="badge">ANÁLISIS GRATUITO</div>
+
+        <h2>Cuéntanos qué necesita tu negocio</h2>
+
+        <p>
+          En menos de 24h te enviaremos ideas reales para ayudarte a ahorrar tiempo y mejorar la gestión de tu negocio.
+        </p>
+
+        <p>
+          Restaurantes, clínicas, gimnasios y negocios locales ya trabajan de forma más organizada con nosotros.
+        </p>
+      </div>
+
+      <div class="contact-box">
+
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+          <input type="text" id="negocio" name="negocio" placeholder="Negocio" required>
+          <input type="email" id="email" name="email" placeholder="Email" required>
+          <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+          <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué problema quieres resolver"></textarea>
+
+          <button class="btn btn-primary" type="submit">
+            Solicitar análisis gratuito
+          </button>
+
+          <div id="form-success" style="display:none; margin-top:14px; color:var(--green-dark); font-weight:700;">
+            ✓ Recibido. Te contactaremos pronto.
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+        <a href="#" class="logo">TTAG<span>.</span></a>
+
+        <p style="margin-top:20px; max-width:420px;">
+          TTAG ayuda a negocios locales a organizar reservas, fidelizar clientes y ahorrar tiempo con soluciones simples y fáciles de usar.
+        </p>
+      </div>
+
+      <div>
+        <h4>Sectores</h4>
+        <a href="#">Hostelería</a><br>
+        <a href="#">Cuidado Personal</a><br>
+        <a href="#">Comercios</a><br>
+        <a href="#">Deporte</a>
+      </div>
+
+      <div>
+        <h4>Empresa</h4>
+        <a href="#process">Cómo trabajamos</a><br>
+        <a href="#contact">Contacto</a><br>
+        <a href="#">Privacidad</a>
+      </div>
+
+    </div>
+
+  </div>
+</footer>
+
+<div class="popup" id="popup">
+  <h3>🎉 Consigue un 50%</h3>
+
+  <p>
+    Recomienda TTAG a otro negocio y consigue el primer mes de mantenimiento al 50%.
+  </p>
+
+  <div class="popup-buttons">
+    <a href="#contact" class="btn btn-primary">Más información</a>
+    <button class="btn btn-secondary" onclick="closePopup()">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  setTimeout(() => {
+    document.getElementById('popup').style.display = 'block';
+  }, 10000);
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    const telefono = document.getElementById('telefono').value;
+    const negocio = document.getElementById('negocio').value;
+    const mensaje = document.getElementById('mensaje').value;
+
+    const btn = e.target.querySelector('button[type="submit"]');
+
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    fetch('https://script.google.com/macros/s/AKfycbx-LjVzgx9Z5yLg2oTroQtiMQ6y44aevN9TZLYfDLpyNmkOSoXM28Qep_BnT3R0hlfB/exec', {
+      method: 'POST',
+      body: new URLSearchParams({
+        nombre: nombre,
+        email: email,
+        telefono: telefono,
+        negocio: negocio,
+        mensaje: mensaje
+      })
+    })
+    .then(response => {
+      document.getElementById('form-success').style.display = 'block';
+      e.target.reset();
+
+      btn.textContent = '✓ Enviado';
+
+      setTimeout(() => {
+        btn.textContent = 'Solicitar análisis gratuito';
+        btn.disabled = false;
+      }, 3000);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      btn.textContent = 'Error al enviar';
+      btn.disabled = false;
+    });
+  }
+</script>
+
+</body>
+</html>

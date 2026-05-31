@@ -1,0 +1,647 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TTAG | Soluciones para Hoteles</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#f8f7f4;
+      --white:#ffffff;
+      --black:#111111;
+      --text:#555;
+      --blue:#0ea5e9;
+      --blue-dark:#0284c7;
+      --border:#e8e8e8;
+      --font-title:'Syne',sans-serif;
+      --font-body:'DM Sans',sans-serif;
+      --transition:.3s ease;
+    }
+
+    body{
+      font-family:var(--font-body);
+      background:var(--bg);
+      color:var(--black);
+      overflow-x:hidden;
+    }
+
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:auto;
+      padding:0 24px;
+    }
+
+    header{
+      position:fixed;
+      width:100%;
+      top:0;
+      left:0;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,0,0,0.05);
+      z-index:999;
+    }
+
+    nav{
+      height:82px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+    }
+
+    .logo img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+    }
+
+    .logo span{
+      font-family:var(--font-title);
+      font-size:28px;
+      font-weight:800;
+      color:var(--black);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--black);
+      font-weight:500;
+    }
+
+    .btn{
+      padding:14px 24px;
+      border-radius:14px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      transition:var(--transition);
+    }
+
+    .btn-primary{
+      background:var(--blue);
+      color:white;
+    }
+
+    .btn-primary:hover{
+      background:var(--blue-dark);
+      transform:translateY(-2px);
+    }
+
+    .btn-secondary{
+      border:1px solid var(--border);
+      background:white;
+      color:var(--black);
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:8px 14px;
+      border-radius:100px;
+      background:rgba(14,165,233,0.12);
+      color:var(--blue-dark);
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:20px;
+    }
+
+    section{
+      padding:110px 0;
+    }
+
+    #hero{
+      padding-top:170px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .hero-text h1{
+      font-family:var(--font-title);
+      font-size:clamp(48px,7vw,74px);
+      line-height:1.05;
+      margin-bottom:24px;
+    }
+
+    .hero-text h1 span{
+      color:var(--blue);
+    }
+
+    .hero-text p{
+      font-size:20px;
+      line-height:1.8;
+      color:var(--text);
+      margin-bottom:34px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .hero-image img{
+      width:100%;
+      border-radius:32px;
+      min-height:550px;
+      object-fit:cover;
+    }
+
+    .section-head{
+      text-align:center;
+      max-width:760px;
+      margin:auto auto 70px;
+    }
+
+    .section-head h2{
+      font-family:var(--font-title);
+      font-size:clamp(36px,5vw,58px);
+      margin-bottom:20px;
+    }
+
+    .section-head p{
+      color:var(--text);
+      line-height:1.8;
+      font-size:18px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:24px;
+    }
+
+    .card{
+      background:white;
+      border-radius:28px;
+      padding:34px;
+      border:1px solid var(--border);
+      transition:var(--transition);
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 60px rgba(0,0,0,0.06);
+    }
+
+    .card h3{
+      font-family:var(--font-title);
+      font-size:26px;
+      margin-bottom:16px;
+    }
+
+    .card p{
+      color:var(--text);
+      line-height:1.8;
+    }
+
+    .split-section{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .split-section img{
+      width:100%;
+      border-radius:28px;
+      min-height:500px;
+      object-fit:cover;
+    }
+
+    .split-content h2{
+      font-family:var(--font-title);
+      font-size:54px;
+      margin-bottom:24px;
+    }
+
+    .split-content p{
+      color:var(--text);
+      line-height:1.9;
+      margin-bottom:26px;
+      font-size:18px;
+    }
+
+    .features{
+      list-style:none;
+      margin-top:24px;
+    }
+
+    .features li{
+      margin-bottom:14px;
+      color:var(--text);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .stat{
+      background:white;
+      border-radius:24px;
+      padding:34px;
+      border:1px solid var(--border);
+      text-align:center;
+    }
+
+    .stat h3{
+      font-size:52px;
+      color:var(--blue);
+      font-family:var(--font-title);
+      margin-bottom:12px;
+    }
+
+    .testimonial{
+      background:white;
+      border-radius:28px;
+      padding:40px;
+      border:1px solid var(--border);
+      max-width:850px;
+      margin:auto;
+      text-align:center;
+    }
+
+    .testimonial p{
+      font-size:22px;
+      line-height:1.9;
+      color:var(--text);
+      margin-bottom:24px;
+    }
+
+    .contact-box{
+      background:white;
+      border-radius:32px;
+      padding:50px;
+      border:1px solid var(--border);
+      max-width:900px;
+      margin:auto;
+      text-align:center;
+    }
+
+    .contact-box h2{
+      font-family:var(--font-title);
+      font-size:56px;
+      margin-bottom:22px;
+    }
+
+    .contact-box p{
+      color:var(--text);
+      line-height:1.9;
+      margin-bottom:34px;
+      font-size:18px;
+    }
+
+    form{
+      display:grid;
+      gap:18px;
+    }
+
+    input,
+    textarea{
+      width:100%;
+      padding:16px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      font-family:var(--font-body);
+      font-size:15px;
+    }
+
+    textarea{
+      resize:vertical;
+      min-height:140px;
+    }
+
+    footer{
+      padding:80px 0;
+      border-top:1px solid var(--border);
+      background:white;
+    }
+
+    @media(max-width:900px){
+
+      .hero-grid,
+      .split-section,
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="container">
+
+    <nav>
+
+      <a href="index.html" class="logo">
+        <img src="favicon.png" alt="TTAG Logo">
+        <span>TTAG</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#problemas">Problemas</a></li>
+        <li><a href="#soluciones">Soluciones</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+
+      <a href="#contact" class="btn btn-primary">
+        Solicitar demo
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+<section id="hero">
+
+  <div class="container">
+
+    <div class="hero-grid">
+
+      <div class="hero-text">
+
+        <div class="badge">
+          IA PARA HOTELES
+        </div>
+
+        <h1>
+          Reservas automáticas <span>24/7</span> con inteligencia artificial
+        </h1>
+
+        <p>
+          Automatiza llamadas, responde consultas y acepta reservas incluso mientras tu recepción está cerrada.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="#contact" class="btn btn-primary">
+            Solicitar demo
+          </a>
+
+          <a href="#soluciones" class="btn btn-secondary">
+            Ver soluciones
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="hero-image">
+
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1400&auto=format&fit=crop" alt="Hotel moderno">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="problemas">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="badge">PROBLEMAS COMUNES</div>
+
+      <h2>
+        Lo que hace perder reservas a muchos hoteles
+      </h2>
+
+      <p>
+        Muchos hoteles pierden clientes por no poder responder llamadas o gestionar reservas fuera de horario.
+      </p>
+
+    </div>
+
+    <div class="grid-3">
+
+      <div class="card">
+
+        <h3>❌ Llamadas perdidas</h3>
+
+        <p>
+          Clientes potenciales llaman cuando recepción está ocupada o cerrada.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>❌ Reservas limitadas</h3>
+
+        <p>
+          Depender del personal limita las reservas a horarios concretos.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>❌ Saturación del equipo</h3>
+
+        <p>
+          El personal pierde tiempo respondiendo siempre las mismas preguntas.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="soluciones">
+
+  <div class="container">
+
+    <div class="split-section">
+
+      <img src="https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=1400&auto=format&fit=crop" alt="Recepción hotel">
+
+      <div class="split-content">
+
+        <div class="badge">
+          SOLUCIONES TTAG
+        </div>
+
+        <h2>
+          Un bot de llamadas que reserva habitaciones por ti
+        </h2>
+
+        <p>
+          Nuestro asistente con IA responde llamadas automáticamente, informa sobre disponibilidad y ayuda a cerrar reservas las 24 horas.
+        </p>
+
+        <ul class="features">
+
+          <li>✓ Atención telefónica automática 24/7</li>
+          <li>✓ Reservas sin intervención humana</li>
+          <li>✓ Respuestas instantáneas</li>
+          <li>✓ Integración con calendario y disponibilidad</li>
+          <li>✓ Confirmaciones automáticas</li>
+          <li>✓ Atención en varios idiomas</li>
+          <li>✓ Menos carga para recepción</li>
+          <li>✓ Más reservas directas</li>
+
+        </ul>
+
+        <a href="#contact" class="btn btn-primary">
+          Solicitar demo
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="beneficios">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="badge">
+        BENEFICIOS
+      </div>
+
+      <h2>
+        Lo que puedes conseguir
+      </h2>
+
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <h3>+35%</h3>
+        <p>Más reservas directas</p>
+      </div>
+
+      <div class="stat">
+        <h3>24/7</h3>
+        <p>Disponibilidad automática</p>
+      </div>
+
+      <div class="stat">
+        <h3>-60%</h3>
+        <p>Menos carga para recepción</p>
+      </div>
+
+  </div>
+
+</section>
+
+<section id="contact">
+
+  <div class="container">
+
+    <div class="contact-box">
+
+      <div class="badge">
+        DEMO GRATUITA
+      </div>
+
+      <h2>
+        Automatiza las llamadas de tu hotel
+      </h2>
+
+      <p>
+        Descubre cómo un asistente con IA puede ayudarte a captar más reservas cada día.
+      </p>
+
+      <form>
+
+        <input type="text" placeholder="Nombre">
+
+        <input type="text" placeholder="Nombre del hotel">
+
+        <input type="email" placeholder="Email">
+
+        <input type="tel" placeholder="Teléfono">
+
+        <textarea placeholder="Cuéntanos cómo gestionáis actualmente las reservas"></textarea>
+
+        <button class="btn btn-primary">
+          Solicitar demo gratuita
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <div class="container">
+
+    <a href="index.html" class="logo">
+      <img src="favicon.png" alt="TTAG Logo">
+      <span>TTAG</span>
+    </a>
+
+  </div>
+
+</footer>
+
+</body>
+</html>
+```

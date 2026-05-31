@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TTAG | Soluciones para Gimnasios</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#f7fafc;
+      --white:#ffffff;
+      --black:#111111;
+      --text:#5f6b76;
+
+      --blue:#0ea5e9;
+      --blue-dark:#0284c7;
+
+      --border:#e7edf2;
+
+      --font-title:'Syne',sans-serif;
+      --font-body:'DM Sans',sans-serif;
+
+      --transition:.3s ease;
+    }
+
+    body{
+      font-family:var(--font-body);
+      background:var(--bg);
+      color:var(--black);
+      overflow-x:hidden;
+    }
+
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:auto;
+      padding:0 24px;
+    }
+
+    header{
+      position:fixed;
+      width:100%;
+      top:0;
+      left:0;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,0,0,0.05);
+      z-index:999;
+    }
+
+    nav{
+      height:82px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+    }
+
+    .logo img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+    }
+
+    .logo span{
+      font-family:var(--font-title);
+      font-size:28px;
+      font-weight:800;
+      color:var(--black);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--black);
+      font-weight:600;
+      transition:var(--transition);
+    }
+
+    .nav-links a:hover{
+      color:var(--blue);
+    }
+
+    .btn{
+      padding:15px 26px;
+      border-radius:16px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      transition:var(--transition);
+    }
+
+    .btn-primary{
+      background:var(--blue);
+      color:white;
+      box-shadow:0 10px 30px rgba(14,165,233,0.22);
+    }
+
+    .btn-primary:hover{
+      background:var(--blue-dark);
+      transform:translateY(-3px);
+    }
+
+    .btn-secondary{
+      border:1px solid var(--border);
+      background:white;
+      color:var(--black);
+    }
+
+    .btn-secondary:hover{
+      transform:translateY(-3px);
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:8px 14px;
+      border-radius:100px;
+      background:rgba(14,165,233,0.12);
+      color:var(--blue-dark);
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:20px;
+      letter-spacing:.5px;
+    }
+
+    section{
+      padding:110px 0;
+    }
+
+    #hero{
+      padding-top:170px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .hero-text h1{
+      font-family:var(--font-title);
+      font-size:clamp(48px,7vw,74px);
+      line-height:1.05;
+      margin-bottom:24px;
+    }
+
+    .hero-text h1 span{
+      color:var(--blue);
+    }
+
+    .hero-text p{
+      font-size:20px;
+      line-height:1.9;
+      color:var(--text);
+      margin-bottom:34px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .hero-image img{
+      width:100%;
+      border-radius:34px;
+      min-height:580px;
+      object-fit:cover;
+      box-shadow:0 25px 70px rgba(0,0,0,0.08);
+    }
+
+    .section-head{
+      text-align:center;
+      max-width:760px;
+      margin:auto auto 70px;
+    }
+
+    .section-head h2{
+      font-family:var(--font-title);
+      font-size:clamp(36px,5vw,58px);
+      line-height:1.1;
+      margin-bottom:20px;
+    }
+
+    .section-head p{
+      color:var(--text);
+      line-height:1.9;
+      font-size:18px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:24px;
+    }
+
+    .card{
+      background:white;
+      border-radius:30px;
+      padding:36px;
+      border:1px solid var(--border);
+      transition:var(--transition);
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 60px rgba(0,0,0,0.06);
+    }
+
+    .card h3{
+      font-family:var(--font-title);
+      font-size:28px;
+      margin-bottom:16px;
+    }
+
+    .card p{
+      color:var(--text);
+      line-height:1.9;
+    }
+
+    .split-section{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .split-section img{
+      width:100%;
+      border-radius:32px;
+      min-height:540px;
+      object-fit:cover;
+      box-shadow:0 25px 70px rgba(0,0,0,0.08);
+    }
+
+    .split-content h2{
+      font-family:var(--font-title);
+      font-size:58px;
+      line-height:1.05;
+      margin-bottom:24px;
+    }
+
+    .split-content p{
+      color:var(--text);
+      line-height:1.9;
+      margin-bottom:28px;
+      font-size:18px;
+    }
+
+    .features{
+      list-style:none;
+      margin-top:24px;
+    }
+
+    .features li{
+      margin-bottom:14px;
+      color:var(--text);
+      font-size:17px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .stat{
+      background:white;
+      border-radius:28px;
+      padding:38px;
+      border:1px solid var(--border);
+      text-align:center;
+    }
+
+    .stat h3{
+      font-size:54px;
+      color:var(--blue);
+      font-family:var(--font-title);
+      margin-bottom:12px;
+    }
+
+    .testimonial{
+      background:white;
+      border-radius:32px;
+      padding:46px;
+      border:1px solid var(--border);
+      max-width:850px;
+      margin:auto;
+      text-align:center;
+    }
+
+    .testimonial p{
+      font-size:24px;
+      line-height:1.9;
+      color:var(--text);
+      margin-bottom:24px;
+    }
+
+    .contact-box{
+      background:white;
+      border-radius:36px;
+      padding:60px;
+      border:1px solid var(--border);
+      max-width:920px;
+      margin:auto;
+      text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.04);
+    }
+
+    .contact-box h2{
+      font-family:var(--font-title);
+      font-size:58px;
+      line-height:1.05;
+      margin-bottom:22px;
+    }
+
+    .contact-box p{
+      color:var(--text);
+      line-height:1.9;
+      margin-bottom:36px;
+      font-size:18px;
+    }
+
+    form{
+      display:grid;
+      gap:18px;
+    }
+
+    input,
+    textarea{
+      width:100%;
+      padding:18px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      font-family:var(--font-body);
+      font-size:15px;
+      outline:none;
+      transition:var(--transition);
+    }
+
+    input:focus,
+    textarea:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 4px rgba(14,165,233,0.12);
+    }
+
+    textarea{
+      resize:vertical;
+      min-height:140px;
+    }
+
+    footer{
+      padding:80px 0;
+      border-top:1px solid var(--border);
+      background:white;
+    }
+
+    @media(max-width:900px){
+
+      .hero-grid,
+      .split-section,
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .hero-text h1,
+      .split-content h2,
+      .contact-box h2{
+        font-size:44px;
+      }
+
+      .hero-image img,
+      .split-section img{
+        min-height:420px;
+      }
+
+      .contact-box{
+        padding:40px 28px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="container">
+
+    <nav>
+
+      <a href="index.html" class="logo">
+        <img src="favicon.png" alt="TTAG Logo">
+        <span>TTAG</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#problemas">Problemas</a></li>
+        <li><a href="#soluciones">Soluciones</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+
+      <a href="#contact" class="btn btn-primary">
+        Solicitar análisis
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+<section id="hero">
+
+  <div class="container">
+
+    <div class="hero-grid">
+
+      <div class="hero-text">
+
+        <div class="badge">
+          SOLUCIONES PARA GIMNASIOS
+        </div>
+
+        <h1>
+          Tu gimnasio captando clientes <span>24/7</span>
+        </h1>
+
+        <p>
+          Ayudamos a gimnasios y centros deportivos a automatizar llamadas, reservas y atención al cliente sin perder oportunidades.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="#contact" class="btn btn-primary">
+            Solicitar análisis
+          </a>
+
+          <a href="#soluciones" class="btn btn-secondary">
+            Ver soluciones
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="hero-image">
+
+        <img 
+          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1400&auto=format&fit=crop" 
+          alt="Gimnasio moderno"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="problemas">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="badge">PROBLEMAS COMUNES</div>
+
+      <h2>
+        Problemas habituales en gimnasios
+      </h2>
+
+      <p>
+        Muchos gimnasios pierden clientes potenciales por llamadas no atendidas y procesos manuales.
+      </p>
+
+    </div>
+
+    <div class="grid-3">
+
+      <div class="card">
+
+        <h3>❌ Leads perdidos</h3>
+
+        <p>
+          Muchas personas preguntan por precios y horarios pero no reciben respuesta rápida.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>❌ Reservas manuales</h3>
+
+        <p>
+          Gestionar clases y citas consume demasiado tiempo cada día.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>❌ Poco seguimiento</h3>
+
+        <p>
+          Falta automatización para recuperar clientes y mejorar la fidelización.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="soluciones">
+
+  <div class="container">
+
+    <div class="split-section">
+
+      <img 
+        src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1400&auto=format&fit=crop" 
+        alt="Entrenamiento personal"
+      >
+
+      <div class="split-content">
+
+        <div class="badge">
+          SOLUCIONES TTAG
+        </div>
+
+        <h2>
+          Automatización para gimnasios modernos
+        </h2>
+
+        <p>
+          Implementamos herramientas que ayudan a responder llamadas, gestionar reservas y captar más clientes automáticamente.
+        </p>
+
+        <ul class="features">
+
+          <li>✓ Atención automática 24/7</li>
+          <li>✓ Gestión automática de clases</li>
+          <li>✓ Reservas y cambios de horario</li>
+          <li>✓ Recordatorios por WhatsApp</li>
+          <li>✓ Respuesta automática de llamadas</li>
+          <li>✓ Menos carga administrativa</li>
+          <li>✓ Recuperación de clientes</li>
+          <li>✓ Mejor experiencia para socios</li>
+
+        </ul>
+
+        <a href="#contact" class="btn btn-primary">
+          Solicitar análisis
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="beneficios">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="badge">
+        BENEFICIOS
+      </div>
+
+      <h2>
+        Lo que puedes conseguir
+      </h2>
+
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <h3>+50%</h3>
+        <p>Más leads atendidos</p>
+      </div>
+
+      <div class="stat">
+        <h3>24/7</h3>
+        <p>Atención automatizada</p>
+      </div>
+
+      <div class="stat">
+        <h3>-60%</h3>
+        <p>Menos trabajo administrativo</p>
+      </div>
+
+  
+
+</section>
+
+<section id="contact">
+
+  <div class="container">
+
+    <div class="contact-box">
+
+      <div class="badge">
+        ANÁLISIS GRATUITO
+      </div>
+
+      <h2>
+        Cuéntanos sobre tu gimnasio
+      </h2>
+
+      <p>
+        Te enseñaremos cómo automatizar llamadas y mejorar la captación de clientes cada día.
+      </p>
+
+      <form>
+
+        <input type="text" placeholder="Nombre">
+
+        <input type="text" placeholder="Nombre del gimnasio">
+
+        <input type="email" placeholder="Email">
+
+        <input type="tel" placeholder="Teléfono">
+
+        <textarea placeholder="Cuéntanos qué problema quieres resolver"></textarea>
+
+        <button class="btn btn-primary">
+          Solicitar análisis gratuito
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <div class="container">
+
+    <a href="#" class="logo">
+      <img src="favicon.png" alt="TTAG Logo">
+      <span>TTAG</span>
+    </a>
+
+  </div>
+
+</footer>
+
+</body>
+</html>
